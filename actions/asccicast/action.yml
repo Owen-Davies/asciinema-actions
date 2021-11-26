@@ -1,0 +1,15 @@
+name: asciinema
+description: asciinema
+
+
+inputs:
+  args:
+    description: "args"
+    default: "-f README.md"
+    required: true
+
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    ASCCINEMA_MARKDOWN_FILE: ${{ inputs.file }}

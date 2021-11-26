@@ -1,0 +1,46 @@
+name: asciicast2gif
+description: asccicast2gif action
+
+#asciicast2gif [-t theme] [-s speed] [-S scale] [-w cols] [-h rows] <input-json-path-or-url> <output-gif-path>
+
+
+inputs:
+  theme:
+    description: "one of: asciinema, tango, solarized-dark, solarized-light, monokai (default: asciinema)"
+    default: "asciinema"
+    required: false
+  speed:
+    description: "animation speed (default: 1)"
+    default: "1"
+    required: false
+  scale:
+    description: "image scale / pixel density (default: 2)"
+    default: "2"
+    required: false
+  columns:
+    description: "clip terminal to specified number of columns (width)"
+    default: "120"
+    required: false
+  rows:
+    description: "clip terminal to specified number of rows (height)"
+    default: "30"
+    required: false
+  file:
+    description: "asccinema JSON file"
+    required: true
+  output:
+    description: "gif output"
+    default: "demo.gif"
+    required: false
+
+runs:
+  using: docker
+  image: ./Dockerfile
+  env:
+    ASCCINEMA_THEME: ${{ inputs.theme }}
+    ASCCINEMA_SPEED: ${{ inputs.speed }}
+    ASCCINEMA_SCALE: ${{ inputs.scale }}
+    ASCCINEMA_COLUMNS: ${{ inputs.columns }}
+    ASCCINEMA_ROWS: ${{ inputs.rows }}
+    ASCCINEMA_JSON_FILE: ${{ inputs.file }}
+    ASCCINEMA_OUTPUT_FILE: ${{ inputs.output }}
