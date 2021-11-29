@@ -1,0 +1,33 @@
+{
+  "name": "asccinema",
+  "version": "0.0.1",
+  "description": "CLI & library to create asccinema files from markdown",
+  "main": "index.js",
+  "bin": {
+    "mta": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscarnevarezleal/asccinema.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oscarnevarezleal/asccinema/issues"
+  },
+  "homepage": "https://github.com/oscarnevarezleal/asccinema#readme",
+  "devDependencies": {
+    "@types/node": "^16.11.9"
+  },
+  "dependencies": {
+    "debug": "^4.3.2",
+    "turndown": "^7.1.1",
+    "markdown-it": "^12.2.0",
+    "mississippi": "^4.0.0",
+    "yargs": "^17.1.1-candidate.0"
+  }
+}

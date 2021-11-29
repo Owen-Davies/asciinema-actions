@@ -1,9 +1,7 @@
 FROM node:14-alpine3.10 as ts-compiler
 WORKDIR /usr/app
-COPY package*.json ./
-COPY tsconfig*.json ./
+COPY . .
 RUN npm install && npm install typescript -g
-COPY ../.. ./
 RUN npm run build
 
 FROM node:14-alpine3.10 as ts-remover

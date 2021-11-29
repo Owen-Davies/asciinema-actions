@@ -28,6 +28,9 @@ inputs:
   file:
     description: "asccinema JSON file"
     required: true
+  files:
+    description: "glob pattern for multiple asccinema JSON files"
+    required: false
   output:
     description: "gif output"
     default: "demo.gif"
@@ -43,4 +46,5 @@ runs:
     ASCCINEMA_COLUMNS: ${{ inputs.columns }}
     ASCCINEMA_ROWS: ${{ inputs.rows }}
     ASCCINEMA_JSON_FILE: ${{ inputs.file }}
+    ASCCINEMA_GLOB_EXP: ${{ inputs.files }}
     ASCCINEMA_OUTPUT_FILE: ${{ inputs.output }}
