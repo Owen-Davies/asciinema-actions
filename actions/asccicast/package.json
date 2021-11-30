@@ -1,10 +1,10 @@
 {
-  "name": "asccinema",
+  "name": "ascc",
   "version": "0.0.1",
-  "description": "CLI & library to create asccinema files from markdown",
+  "description": "CLI & library to create asciinema files from markdown",
   "main": "index.js",
   "bin": {
-    "mta": "./dist/cli.js"
+    "ascc": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsc",

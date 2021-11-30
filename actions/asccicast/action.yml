@@ -7,9 +7,13 @@ inputs:
     description: "args"
     default: "-f README.md"
     required: true
+  config:
+    required: false
+    description: "Config JSON"
 
 runs:
   using: docker
   image: Dockerfile
   env:
     ASCCINEMA_MARKDOWN_FILE: ${{ inputs.file }}
+    ASCCINEMA_CONFIG_FILE: ${{ inputs.config }}

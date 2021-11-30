@@ -1,3 +1,5 @@
+import {RenderingOptions} from "./types";
+
 const TurndownService = require('turndown')
 const debug = require('debug')('asccinema')
 const os = require('os');
@@ -66,6 +68,12 @@ export const defaults: Asciicast = {
     "env": {"TERM": "xterm-256color", "SHELL": "/bin/zsh"}
 };
 
+export const defaultRenderingOptions: RenderingOptions = {
+    cpm: 300,
+    skipEmptyLines: true,
+    prompt: null
+};
+
 const formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 4,
     maximumFractionDigits: 4,
@@ -98,7 +106,6 @@ export class MarkdownToAsccicast {
 
     private _parsed: string = ''
     private _timeAcc: { [key: string]: any } = {}
-    private _blocks: CodeBlock[] = []
 
     private lineDecorator(line: string): string {
         // replace multiple signs at the beginning
@@ -127,8 +134,8 @@ export class MarkdownToAsccicast {
     private frameRenderer = (blockIndex: string, v: string, index: number): Frame => {
         const cwd = process.cwd();
         // const prompt = process.env.ASCCINEMA_PROMPT || "\u001b[32m~"+`${process.cwd()}`+"\u001b[30m\u001b(B\u001b[m "
-        const prompt = process.env.ASCCINEMA_PROMPT || `${cwd.replace(/\\/g, "/")} `
-        const cpm = 300; // chars per minute
+        const prompt = this._renderingOptions.prompt || process.env.ASCCINEMA_PROMPT || `${cwd.replace(/\\/g, "/")} `
+        const cpm = this._renderingOptions.cpm; // chars per minute
         const sps = 60 / cpm; // strokes per second
         const mil = Math.random()
 
@@ -137,7 +144,7 @@ export class MarkdownToAsccicast {
         const isComment: boolean = v.startsWith('#')
         const showPrompt: boolean = !isComment
         const started: boolean = !this._timeAcc[blockIndex];
-        const skipEmptyLines: boolean = true;
+        const skipEmptyLines: boolean = this._renderingOptions.skipEmptyLines;
 
         let lines = []
         let lineData: any[] = []
@@ -220,7 +227,7 @@ export class MarkdownToAsccicast {
                 const fenceFooter = '```'
                 const fenceStart = content.indexOf(fenceHeader, lastFenceIndex)
                 const fenceEnd = content.indexOf(fenceFooter, fenceStart + str.length + 3)
-                const html = `<img src="./asccinema-block-${blocks.length}" />`
+                const html = `<img alt="code block" src="./asccinema-block-${blocks.length}" />`
                 let block: CodeBlock = {
                     index: blocks.length,
                     startAt: fenceStart,
@@ -268,6 +275,8 @@ export class MarkdownToAsccicast {
         }
     };
 
+    private _renderingOptions: RenderingOptions;
+
     /**
      *
      * @param block
@@ -290,11 +299,19 @@ export class MarkdownToAsccicast {
         }
     }
 
-    constructor(options: Partial<Asciicast>) {
+    /**
+     *
+     * @param options
+     * @param renderingOptions
+     */
+    constructor(options: Partial<Asciicast>, renderingOptions?: Partial<RenderingOptions>) {
 
         const self = this;
 
         this.options = Object.assign(defaults, options)
+        this._renderingOptions = Object.assign(defaultRenderingOptions, renderingOptions)
+
+        console.log('this._renderingOptions', this._renderingOptions)
 
         this.turndownService = new TurndownService({
             preformattedCode: true,

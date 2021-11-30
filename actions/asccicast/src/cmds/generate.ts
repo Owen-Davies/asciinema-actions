@@ -1,6 +1,7 @@
 import {blockToJson, MarkdownToAsccicast} from "../asciicast";
 import path from "path";
 import fs from "fs";
+import {GenerateArguments} from "../types";
 
 const concat = require('mississippi').concat;
 // const debug = require('debug')('mta');
@@ -19,16 +20,21 @@ interface OutputOptions {
  * @param prefix
  * @param outputFile
  * @param outDir
+ * @param renderingOptions
  */
-async function parse(str: any, {prefix, outputFile, outDir}: OutputOptions): Promise<void> {
+async function parse(str: any, {
+    prefix,
+    outputFile,
+    outDir
+}: OutputOptions, {renderingOptions}: GenerateArguments): Promise<void> {
     const markdown: string = Buffer.from(str).toString()
-    const mda = new MarkdownToAsccicast({
+    const ascc = new MarkdownToAsccicast({
         title: "demo"
-    })
-    const cast = mda.parseAll(markdown)
+    }, renderingOptions)
+    const cast = ascc.parseAll(markdown)
     const wp = path.join(path.resolve(outDir))
 
-    const template = await mda.hydrateImageBlocks(cast.template);
+    const template = await ascc.hydrateImageBlocks(cast.template);
 
     fs.writeFileSync(`${wp}/asccinema-casts.json`, JSON.stringify(cast))
     fs.writeFileSync(`${wp}/${outputFile}`, template)
@@ -57,11 +63,12 @@ export const builder = (yargs: any) => {
         .describe('o', 'output file')
 }
 
+
 /**
  *
  * @param argv
  */
-export async function handler(argv: any): Promise<any> {
+export async function handler(argv: GenerateArguments): Promise<any> {
     const sourceFile = argv.s;
     const outDir = process.cwd();
     const outputFile = argv.o || 'asccinema-template.md';
@@ -73,11 +80,14 @@ export async function handler(argv: any): Promise<any> {
             if (err) {
                 throw err;
             } else {
-                parse(dataBuffer.toString(), {
-                    prefix: 'block-',
-                    outputFile,
-                    outDir
-                });
+                parse(dataBuffer.toString(),
+                    {
+                        prefix: 'block-',
+                        outputFile,
+                        outDir
+                    },
+                    argv
+                );
             }
         });
     }
