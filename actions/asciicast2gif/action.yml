@@ -19,11 +19,11 @@ inputs:
     required: false
   columns:
     description: "clip terminal to specified number of columns (width)"
-    default: "120"
+    default: "80"
     required: false
   rows:
     description: "clip terminal to specified number of rows (height)"
-    default: "30"
+    default: "24"
     required: false
   file:
     description: "asccinema JSON file"
