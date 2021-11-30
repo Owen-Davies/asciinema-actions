@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir -p .asccicast
+mkdir -p .asciicast
 
 for filename in ${ASCCINEMA_GLOB_EXP}; do
   echo "=== PROCESSING: $filename ==="
