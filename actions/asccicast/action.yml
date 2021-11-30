@@ -15,5 +15,5 @@ runs:
   using: docker
   image: Dockerfile
   env:
-    ASCCINEMA_MARKDOWN_FILE: ${{ inputs.file }}
-    ASCCINEMA_CONFIG_FILE: ${{ inputs.config }}
+    ASCIINEMA_MARKDOWN_FILE: ${{ inputs.file }}
+    ASCIINEMA_CONFIG_FILE: ${{ inputs.config }}

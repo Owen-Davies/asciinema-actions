@@ -40,11 +40,11 @@ runs:
   using: docker
   image: ./Dockerfile
   env:
-    ASCCINEMA_THEME: ${{ inputs.theme }}
-    ASCCINEMA_SPEED: ${{ inputs.speed }}
-    ASCCINEMA_SCALE: ${{ inputs.scale }}
-    ASCCINEMA_COLUMNS: ${{ inputs.columns }}
-    ASCCINEMA_ROWS: ${{ inputs.rows }}
-    ASCCINEMA_JSON_FILE: ${{ inputs.file }}
-    ASCCINEMA_GLOB_EXP: ${{ inputs.files }}
-    ASCCINEMA_OUTPUT_FILE: ${{ inputs.output }}
+    ASCIINEMA_THEME: ${{ inputs.theme }}
+    ASCIINEMA_SPEED: ${{ inputs.speed }}
+    ASCIINEMA_SCALE: ${{ inputs.scale }}
+    ASCIINEMA_COLUMNS: ${{ inputs.columns }}
+    ASCIINEMA_ROWS: ${{ inputs.rows }}
+    ASCIINEMA_JSON_FILE: ${{ inputs.file }}
+    ASCIINEMA_GLOB_EXP: ${{ inputs.files }}
+    ASCIINEMA_OUTPUT_FILE: ${{ inputs.output }}
