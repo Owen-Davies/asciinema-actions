@@ -335,8 +335,9 @@ export class MarkdownToAsccicast {
     hydrateImageBlocks(content: string): Promise<string> {
         return new Promise((resolve, reject) => {
             let replaced: string = content
-            replaced = replaced.replace("%codeblock-img-0%", '.asccicast/block-0.gif')
-            replaced = replaced.replace("%codeblock-img-1%", '.asccicast/block-1.gif')
+            replaced = replaced.replace("%codeblock-img-0%", '.asciicast/block-0.gif')
+            replaced = replaced.replace("%codeblock-img-1%", '.asciicast/block-1.gif')
+            replaced = replaced.replace("%codeblock-img-2%", '.asciicast/block-2.gif')
             resolve(replaced)
         })
     }
