@@ -36,7 +36,7 @@ async function parse(str: any, {
 
     const template = await ascc.hydrateImageBlocks(cast.template);
 
-    fs.writeFileSync(`${wp}/asccinema-casts.json`, JSON.stringify(cast))
+    fs.writeFileSync(`${wp}/asciinema-casts.json`, JSON.stringify(cast))
     fs.writeFileSync(`${wp}/${outputFile}`, template)
 
     for (let blockIndex in cast.blocks) {
@@ -71,7 +71,7 @@ export const builder = (yargs: any) => {
 export async function handler(argv: GenerateArguments): Promise<any> {
     const sourceFile = argv.s;
     const outDir = process.cwd();
-    const outputFile = argv.o || 'asccinema-template.md';
+    const outputFile = argv.o || 'asciinema-template.md';
 
     if (sourceFile === '-') {
         process.stdin.pipe(concat(parse));

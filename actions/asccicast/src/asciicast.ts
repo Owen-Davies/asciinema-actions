@@ -311,8 +311,6 @@ export class MarkdownToAsccicast {
         this.options = Object.assign(defaults, options)
         this._renderingOptions = Object.assign(defaultRenderingOptions, renderingOptions)
 
-        console.log('this._renderingOptions', this._renderingOptions)
-
         this.turndownService = new TurndownService({
             preformattedCode: true,
             headingStyle: 'atx',
