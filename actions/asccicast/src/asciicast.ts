@@ -321,7 +321,7 @@ export class MarkdownToAsccicast {
             .addRule('asccinema', {
                 filter: 'pre',
                 replacement(content: string) {
-                    return '```' +content + '```' + `![](${self.nextCodeBlockImage()})`
+                    return '```\n' +content + '\n```\n' + `![](${self.nextCodeBlockImage()})`
                 }
             })
     }
