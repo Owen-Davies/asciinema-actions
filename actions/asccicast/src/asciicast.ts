@@ -203,7 +203,7 @@ export class MarkdownToAsccicast {
             // increment our time accumulator on each frame
             acc += sps + 3
             // update current time
-            this._timeAcc[blockIndex].current = Number(frameEndsAt)
+            this._timeAcc[blockIndex].current = Number(frameEndsAt + 3)
         }
 
         return {startedAt, frame: lines.join("\n"), lineData}
