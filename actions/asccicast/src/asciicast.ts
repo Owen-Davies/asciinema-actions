@@ -58,7 +58,7 @@ interface Timer {
 export const defaults: Asciicast = {
     "version": 2,
     "width": 80,
-    "height": 24,
+    "height": 48,
     "theme": {
         "fg": "#d0d0d0",
         "bg": "#212121",
