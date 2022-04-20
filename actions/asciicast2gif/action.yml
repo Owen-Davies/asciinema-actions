@@ -23,7 +23,7 @@ inputs:
     required: false
   rows:
     description: "clip terminal to specified number of rows (height)"
-    default: "24"
+    default: "68"
     required: false
   file:
     description: "asccinema JSON file"
